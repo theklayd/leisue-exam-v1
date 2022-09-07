@@ -1,14 +1,23 @@
-import { Module } from '@nestjs/common';
+import { Module,CacheModule  } from '@nestjs/common';
+import * as redisStore from 'cache-manager-redis-store';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersController } from './users/users.controller';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { CacheService } from './cache/cache.service';
 
 @Module({
-  imports: [AuthModule, UsersModule],
+  imports: [
+    AuthModule, 
+    UsersModule,
+    CacheModule.register({ 
+      store: redisStore, 
+      host : 'localhost',
+      port : 49153,
+      auth_pass : 'redispw'
+    })
+  ],
   controllers: [AppController, UsersController],
-  providers: [AppService, CacheService],
+  providers: [AppService]
 })
 export class AppModule {}
