@@ -1,4 +1,4 @@
-import { Injectable, Response } from '@nestjs/common';
+import { BadRequestException, Injectable, Response } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { ProfileModel } from 'src/models/profile.model';
 import { RegisterModel } from 'src/models/register.model';
@@ -9,6 +9,7 @@ export type Users = any;
 @Injectable()
 export class UsersService {
 
+  // dummy only
   private users:ProfileModel[] = [
     {
       userId: '1',
@@ -31,6 +32,12 @@ export class UsersService {
   }
 
   async register(payload: RegisterModel, @Response() res): Promise<string> {
+
+    const user = await this.findOne(payload.email);
+    if (user) {
+      throw new BadRequestException("Email already exist");
+    }
+
     this.users.push({
       userId: randomUUID(), //for demo only
       firstName : payload.firstName,
@@ -38,10 +45,12 @@ export class UsersService {
       email: payload.email,
       password: payload.password
     });
-    console.table(this.users)
+
     return  res.set({  }).json(
       payload
     );
-    // return this.users.find(user => user.email === email);
+
+
+
   }
 }
