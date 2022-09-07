@@ -3,16 +3,16 @@ services:
   web:
     build: .
     ports:
-      - "49160:3000"
+      - "3000:3000"
     volumes:
       - .:/code
       - logvolume01:/var/log
-    depends_on:
-      - redis
+
   redis:
     image: redis:latest
     volumes:
-      - data:/data
+      - .:/code
+      - logvolume01:/var/log
     ports:
       - 6379:6379
 volumes:

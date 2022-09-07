@@ -45,7 +45,7 @@ export class UsersService {
       email: payload.email,
       password: payload.password
     });
-
+    console.log('register successful')
     return  res.set({  }).json(
       payload
     );

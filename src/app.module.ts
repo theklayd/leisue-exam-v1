@@ -13,8 +13,8 @@ import { UsersModule } from './users/users.module';
     CacheModule.register({ 
       store: redisStore, 
       host : 'localhost',
-      port : 49153,
-      auth_pass : 'redispw'
+      port : 6379,
+      // auth_pass : 'redispw'
     })
   ],
   controllers: [AppController, UsersController],

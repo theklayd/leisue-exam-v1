@@ -32,8 +32,8 @@ export class AuthService {
     }
 
     async logout(email, @Response() res): Promise<string> {
-        const response = this.deleteKey(email);
-        res.set().json(response);
+        const response = await this.deleteKey(email);
+        res.set().json({message:`success ${response}`});
         return; 
     }
 

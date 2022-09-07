@@ -29,6 +29,7 @@ export class UsersController {
         return await this.authService.login(LoginModel,res);
     }
 
+
     // When our POST /logout route is hit, 
     // the Guard will automatically invoke our passport-jwt custom configured logic, 
     // validating the JWT, and assigning the user property to the Request object.

@@ -18,8 +18,8 @@ import { JwtStrategy } from './jwt.strategy';
     CacheModule.register({ 
       store: redisStore, 
       host : 'localhost',
-      port : 49153,
-      auth_pass : 'redispw'
+      port : 6379,
+      // auth_pass : 'redispw'
     })
   ],
   providers: [
